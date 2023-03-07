@@ -15,7 +15,7 @@ const RootLayout = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={NavLink} to="/customers">Customers</Nav.Link>
-            <Nav.Link as={NavLink} to="#">List Books</Nav.Link>
+            <Nav.Link as={NavLink} to="/listbooks">List Books</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"; 
 import Card from 'react-bootstrap/Card';
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
 
@@ -54,27 +54,32 @@ export default Customers;
 function CardNavbar({children, addCustomers, ...props}) {
   
   return (
-    <Card>
-      <Card.Header>
-        <Nav variant="tabs" defaultActiveKey="#first">
-          <Nav.Item>
-            <Nav.Link as={NavLink} to="/first">Active</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link as={NavLink} to="/link">Link</Nav.Link>
-          </Nav.Item>
-        </Nav>
-      </Card.Header>
-      <Card.Body>
-        <Card.Title>Output something</Card.Title>
-        <Card.Text>
-          {children}
-        </Card.Text>
-        <Button variant="primary"
-        onClick={() => addCustomers(prompt())} {...props}
-        >Add customer</Button>
-      </Card.Body>
-    </Card>
+    <>
+      <Card>
+        <Card.Header>
+          <Nav variant="tabs" defaultActiveKey="#first">
+            <Nav.Item>
+              <Nav.Link as={NavLink} to="./active">Active</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link as={NavLink} to="/link">Link</Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Card.Header>
+        <Card.Body>
+          <Card.Title>Output something</Card.Title>
+          <Card.Text>
+            {children}
+          </Card.Text>
+          <Button variant="primary"
+          onClick={() => addCustomers(prompt())} {...props}
+          >Add customer</Button>
+        </Card.Body>
+      </Card>
+      <Outlet />
+    </>
+    
+
   )
 }
 
