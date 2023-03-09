@@ -5,6 +5,7 @@ import RootLayout from "./layouts/RootLayout";
 import Customers from "./components/Customers";
 import ListBooks from "./components/ListBooks";
 import Active from "./components/nested/Active";
+import Test from "./components/nested/Test";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="active" element={<Active />} />
         </Route>
         <Route path="listbooks" element={<ListBooks />} />
+        <Route path="test" element={<Test />} />
       </Route>
     )
   )

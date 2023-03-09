@@ -3,44 +3,41 @@ import Card from 'react-bootstrap/Card';
 import { NavLink, Outlet } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
+import { addCustomersAction, removeCustomersAction } from "../store/customersReducer";
 
 const Customers = () => {
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const customers = useSelector(state => state.customers.customers)
-  console.log(customers);
-
+  
   const addCustomers = (name) => {
-    const customer = {
+    const customers = {
       name,
       id: Date.now()
     }
-    dispatch({type: "ADD_CUSTOMERS", payload: customer})
+    dispatch(addCustomersAction(customers))
   }
 
-  const removeCustomer = (customer) => {
-    dispatch({type: "REMOVE_CUSTOMERS", payload: customer.id})
+  const removeCustomers = (customer) => {
+    dispatch(removeCustomersAction(customer.id))
   }
 
   return (
     <div className="container my-5">
-      <CardNavbar addCustomers={addCustomers} >
-        <div className="my-5">
-          {customers.length > 0 
-            ?
-            <div>
-              {customers.map(customer => (
-                <div className="my-3 cursor-pointer border-bottom"
-                onClick={() => removeCustomer(customer)}
-                
-                >{customer.name}</div>
-              ))}
-            </div>
-            :
-            <p>Clients missing</p>
-          }
-        </div>
-      </CardNavbar>
+      <CustomerComponent addCustomer={addCustomers}>
+        {customers.length > 0 
+          ? 
+          <ul>{customers.map(customer => (
+            <li key={customer.key}
+            onClick={() => removeCustomers(customer)}
+            className="list-unstyled"
+            >{customer.name}</li>
+          ))}</ul>
+          :
+          <p>Clients are missing</p>
+        }
+      </CustomerComponent>
+      
     </div>
   );
 }
@@ -51,35 +48,31 @@ export default Customers;
 
 
 
-function CardNavbar({children, addCustomers, ...props}) {
-  
-  return (
-    <>
-      <Card>
-        <Card.Header>
-          <Nav variant="tabs" defaultActiveKey="#first">
-            <Nav.Item>
-              <Nav.Link as={NavLink} to="./active">Active</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link as={NavLink} to="/link">Link</Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </Card.Header>
-        <Card.Body>
-          <Card.Title>Output something</Card.Title>
-          <Card.Text>
-            {children}
-          </Card.Text>
-          <Button variant="primary"
-          onClick={() => addCustomers(prompt())} {...props}
-          >Add customer</Button>
-        </Card.Body>
-      </Card>
-      <Outlet />
-    </>
-    
+const CustomerComponent = ({children, addCustomer}) => {
 
-  )
-}
+  return(
+  <div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-pills card-header-pills">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Active</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled">Disabled</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">{children}</p>
+    <a href="#" class="btn btn-primary"
+    onClick={() => addCustomer(prompt())}
+    >Add customer</a>
+  </div>
+</div>
+)}
+
 
