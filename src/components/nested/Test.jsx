@@ -1,29 +1,46 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Test = () => {
+  
+  const [blogs, setBlogs] = useState(null)
+  const [isPending, setIsPending] = useState(true)
 
-  const eachCon = (array, n) => {
-    let r = [];
-    for(let i = 0; i <= array.length - n; i++) {
-      let chunk = [];
-      for(let j = i; j < i + n; j++) {
-        chunk.push(array[j])
-      }
-      r.push(chunk)
-    }
-    return r
-  }
-  
-  
   useEffect(() => {
-    console.log(eachCon([1, 3, 2, 5, 1, 6, 7], 3));
+    setTimeout(() => {
+      const fetchData = async () => {
+        const response = await fetch('http://localhost:8000/blogs')
+        const data = await response.json()
+        setBlogs(data)
+        setIsPending(false)
+      }
+      fetchData()
+        .then(() => console.log('data fetched'))
+    },1000)
+    
   }, [])
 
   return (
     <div className="container">
+      <CreatePending isPending={isPending} />
+      {blogs && (blogs.map(blog => (
+        <div className="blog-preview" key={blog.id}>
+          <p className="h4">{blog.name}</p>
+          <div>{blog.body}</div>
+          <hr />
+        </div>
+      )))}
       
     </div>
   );
 }
 
 export default Test;
+
+const CreatePending = ({isPending}) => {
+
+  return (
+    <>
+      {isPending && <p>Loading...</p>}
+    </>
+  )
+}

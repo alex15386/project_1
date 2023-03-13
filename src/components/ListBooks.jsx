@@ -1,12 +1,11 @@
-import { collection, getDocs } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { db } from "../lib/init-firebase";
-
-
+import {collection, getDocs} from "firebase/firestore"
+import {db} from "../lib/init-firebase"
+import { useState, useEffect } from "react"
 
 const ListBooks = () => {
 
   const [books, setBooks] = useState([])
+  const [isPending, setIsPending] = useState(true)
 
   useEffect(() => {
     getBooks()
@@ -17,72 +16,47 @@ const ListBooks = () => {
   }, [books])
 
   const getBooks = () => {
-    const booksCollectionRef = collection(db, 'books')
-    getDocs(booksCollectionRef)
-      .then(response => {
-        const bks = response.docs.map(doc => ({
-          data: doc.data(),
-          id: doc.id,
-        }))
-        setBooks(bks)
-      })
-      .catch(error => {
-        console.log(error.message);
-      })
+    setTimeout(() => {
+      const booksCollectionRef = collection(db, 'books')
+      getDocs(booksCollectionRef)
+        .then(response => {
+          const books = response.docs.map(doc => ({
+            data: doc.data(),
+            id: doc.id,
+          }))
+          setBooks(books)
+          setIsPending(false)
+        })
+    }, 1000)
+    
   }
 
+
   return (
-    <div className="container">
-      <CustomComponent books={books} />
+    <div className="container my-5">
+      {isPending && <p>Loading...</p>}
+      
     </div>
   );
 }
 
 export default ListBooks;
 
-
-const CustomComponent = (props) => {
-  const books = props.books
-
-  const [isToggle, setIsToggle] = useState(false)
-
+function GetRefresh() {
 
   return(
-    <div className="my-5">
-      <ul>
-        {isToggle 
-          ?
-        <>
-          {books.map(book => (
-            <article key={book.id} className="bg-info bg-gradient p-1 my-1
-            rounded
-            ">
-              <h2>{book.data.title}</h2>
-              <p>{book.data.author}</p>
-            </article>
-          ))}
-        </>
-          :
-          <p>Is not rendered</p>
-        }
-      </ul>
-      <CustomButton 
-      isToggle={isToggle} 
-      setIsToggle={setIsToggle}
-      className="btn btn-success"
-      >Toggle</CustomButton>
+    <div className="my-2">
+      <button className="btn btn-success"
+      onClick={() => window.location.reload()}
+      >refresh</button>
     </div>
   )
 }
 
-const CustomButton = ({isToggle, setIsToggle, children, ...props}) => {
-
-  return(
+const RenderBooks = ({}) => {
+  return (
     <>
-      <button 
-        onClick={() => setIsToggle(!isToggle)}
-      {...props}
-      >{children}</button>
+      
     </>
   )
-} 
+}

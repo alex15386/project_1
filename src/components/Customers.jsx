@@ -3,7 +3,8 @@ import Card from 'react-bootstrap/Card';
 import { NavLink, Outlet } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
-import { addCustomersAction, removeCustomersAction } from "../store/customersReducer";
+import { addCustomersAction, addManyCUstomersAction, removeCustomersAction } from "../store/customersReducer";
+
 
 const Customers = () => {
 
@@ -36,6 +37,7 @@ const Customers = () => {
           :
           <p>Clients are missing</p>
         }
+        
       </CustomerComponent>
       
     </div>
@@ -49,6 +51,8 @@ export default Customers;
 
 
 const CustomerComponent = ({children, addCustomer}) => {
+
+  
 
   return(
   <div class="card text-center">
@@ -71,6 +75,7 @@ const CustomerComponent = ({children, addCustomer}) => {
     <a href="#" class="btn btn-primary"
     onClick={() => addCustomer(prompt())}
     >Add customer</a>
+    
   </div>
 </div>
 )}

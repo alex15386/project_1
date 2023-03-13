@@ -6,6 +6,8 @@ import Customers from "./components/Customers";
 import ListBooks from "./components/ListBooks";
 import Active from "./components/nested/Active";
 import Test from "./components/nested/Test";
+import Counter from "./components/nested/Counter";
+import NotFound from "./components/NotFound";
 
 
 function App() {
@@ -18,6 +20,9 @@ function App() {
         </Route>
         <Route path="listbooks" element={<ListBooks />} />
         <Route path="test" element={<Test />} />
+        <Route path="counter" element={<Counter />} />
+
+        <Route path="*" element={<NotFound />} />
       </Route>
     )
   )
