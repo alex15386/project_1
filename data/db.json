@@ -1,17 +1,12 @@
 {
   "blogs": [
     {
-      "name": "IgA",
-      "body": "IgA is the most abundant type of antibody in the body comprising most of the immunoglobulin secretions and a significant amount of circulating immunoglobulin",
-      "id": 1
-    },{
-      "name": "IgG",
-      "body": "It is the most common immunoglobulin. There're 4 subclasses of IgG that have subtle differences in the structure of the Fc. It's an opsonin. Opsonisation is an immune process that uses opsonins to tag foreign pathogens for elimination by phagocytes. Without an opsonin such as IgG the negatively charged cell walls of the pathogen and phagocyte repel each other. As for the intracellular pathogens IgG stimulates another kind of immune response called antibody dependent cellular cytotoxicity. It's a type of immune reaction in which a target cell or microbe is coated with antibodies and killed with certain types of white blood cells",
-      "id": 2
-    },{
-      "name": "IgM",
-      "body": "IgM is the largest antibody and it's the first antibody to appear in the initial response to the initial exposure to an antigen",
+      "name": "IgE",
+      "body": "It is thought to be an important part of the immune response against infection caused by bacteria",
       "id": 3
+    },{
+      "name": "IgE acting as a marker",
+      "body": "IgE is an antibody found in the blood that is a marker for allergy diseases. If you get a blood test and it shows that you have an elevated IgE level"
     }
   ]
 }
