@@ -2,6 +2,8 @@ import {collection, getDocs} from "firebase/firestore"
 import {db} from "../lib/init-firebase"
 import { useState, useEffect } from "react"
 import AddBook from "./AddBook"
+import { booksCollectionRef } from "../lib/firestore.collections"
+import EditBook from "./EditBook"
 
 const ListBooks = () => {
 
@@ -17,8 +19,7 @@ useEffect(() => {
 }, [books])
 
 const getBooks = () => {
-  const collectionBooksRef = collection(db, 'books')
-  getDocs(collectionBooksRef)
+  getDocs(booksCollectionRef)
     .then((response) => {
       const books = response.docs.map(doc => ({
         data: doc.data(),
@@ -38,6 +39,8 @@ const getBooks = () => {
           <div className="btn btn-primary"
             onClick={() => setIsToggle(!isToggle)}
           >Toggle button</div>
+          <AddBook />
+          <EditBook />
         </div>
       </div>
     </div>
@@ -49,6 +52,10 @@ export default ListBooks;
 
 
 const RenderBooks = ({books}) => {
+
+  const [show, setShow] = useState(true)
+
+
   return (
     <>
       <ul className="list-unstyled">
@@ -56,9 +63,24 @@ const RenderBooks = ({books}) => {
           <div key={book.id}>
             <h4>{book.data.title}</h4>
             <p>{book.data.author}</p>
+            {show ? <p>{book.id}</p> : <p></p>}
+            <hr />
           </div>
         ))}
       </ul>
+      <ShowID show={show} setShow={setShow} />
     </>
+  )
+}
+
+
+const ShowID = ({show, setShow}) => {
+
+  return (
+    <div className="my-3">
+      <button className="btn btn-warning"
+        onClick={() => setShow(!show)}
+      >Show ID</button>
+    </div>
   )
 }

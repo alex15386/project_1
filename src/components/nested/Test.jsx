@@ -3,48 +3,38 @@ import { useEffect, useState } from "react";
 const Test = () => {
   const [data, setData] = useState(null)
 
+
+  const findShortest = (str) => {
+    return str.split('').sort((a, b) => a.length - b.length)[0]
+  }
+
   useEffect(() => {
-    getBooks('http://localhost:8000/blogs')
-      .then((data) => {
-        setData(data)
-      }).catch(err => {
-        console.log('promise rejected:', err);
-      })
+    console.log(findShortest('IgM is the first antibody'));
   }, [])
 
   
-const getBooks = (resource) => {
-    const request = new XMLHttpRequest();
-    return new Promise((resolve, reject) => {
-      request.addEventListener('readystatechange', () => {
-        if(request.readyState === 4 && request.status === 200) {
-          const data = JSON.parse(request.responseText)
-          resolve(data)
-        } else if(request.readyState === 4) {
-          reject('error getting resource')
-        }
-      })
-      request.open('GET', resource)
-      request.send()
-    })
+  
+  useEffect(() => {
+    getBooks()
+      .then(data => console.log(data))
+      .catch(error => console.log(error.message))
+
+  }, [])
+
+const getBooks = async () => {
+  const response = await fetch('http://localhost:8000/blogs')
+  const data = await response.json()
+  return data
 }
 
   return (
     <div className="container">
-      <Output data={data} className="list-unstyled my-5 bg-success" />
+      <div className="btn btn-success"
+        onClick={() =>findShortest()}
+      >Click</div>
     </div>
   );
 }
 
 export default Test;
 
-
-const Output = ({data, ...props}) => {
-  return (
-    <ul {...props}>
-      {data.map(item => (
-        <li key={item.id}>{item.name}</li>
-      ))}
-    </ul>
-  )
-}
