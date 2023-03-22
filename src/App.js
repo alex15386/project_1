@@ -1,10 +1,11 @@
 import { createBrowserRouter, createRoutesFromElements, Route, Routes,
 RouterProvider,
 } from "react-router-dom";
+import Counter from "./components/Counter";
 import RootLayout from "./layouts/RootLayout";
-import Customers from "./components/Customers";
-import ListBooks from "./components/ListBooks";
-import Active from "./components/nested/Active";
+
+
+
 
 
 function App() {
@@ -12,10 +13,7 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<RootLayout />}>
-        <Route path="customers" element={<Customers />}>
-          <Route path="active" element={<Active />} />
-        </Route>
-        <Route path="listbooks" element={<ListBooks />} />
+        <Route path="counter" element={<Counter />} />
       </Route>
     )
   )
