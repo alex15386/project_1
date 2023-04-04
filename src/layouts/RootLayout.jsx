@@ -15,16 +15,16 @@ const RootLayout = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={NavLink} to="counter">Counter</Nav.Link>
-            <Nav.Link as={NavLink} to="">Link 2</Nav.Link>
+            <Nav.Link as={NavLink} to="stuff">Stuff</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="base">Movies</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
                 Another action
               </NavDropdown.Item>
-              <NavDropdown.Item as={NavLink} to="">Counter</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="">Add Book</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
+              <NavDropdown.Item as={NavLink} to="">
+                Posts
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>

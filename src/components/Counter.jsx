@@ -1,27 +1,28 @@
+import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { increment, decrement } from "../toolkitRedux/toolkitSlice";
+import { incrementByAmount } from "../app/toolkitSlice";
+
+
+
 
 
 const Counter = () => {
 
-  const count = useSelector(state => state.counter.count)
-  const dispatch = useDispatch()
-  console.log(count);
+  
+
+const count = useSelector(state => state.toolkit.count);
+const dispatch  = useDispatch();
+
 
   return (
     <Wrapper>
       <div className="row">
-        <div className="col-sm-12">
-          {count}
-        </div>
-        <div className="col-sm-6">
-          <button>+</button>
-        </div>
-        <div className="col-sm-6">
-          <button
-          onClick={() => dispatch(increment())}
-          >-</button>
-        </div>
+        <div className="col-sm-12">{count}</div>
+        <button className="col-sm-4">+</button>
+        <button className="col-sm-4 btn btn-outline-warning"
+          onClick={() => dispatch(incrementByAmount(Number(prompt())))}
+        >input</button>
+        <button className="col-sm-4">-</button>
       </div>
     </Wrapper>
   )
@@ -41,3 +42,5 @@ const Wrapper = ({children}) => {
     </div>
   );
 }
+
+
