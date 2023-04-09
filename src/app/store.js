@@ -1,12 +1,13 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import toolkitSlice from "./toolkitSlice";
-import postsReducer from "./postsSlice"
+import { combineReducers, configureStore } from "@reduxjs/toolkit"
+import postsSlice from "../components/posts/postsSlice"
+import usersSlice from "../components/users/usersSlice"
+
 
 const rootReducer = combineReducers({
-  toolkit: toolkitSlice,
-  posts: postsReducer
+  posts: postsSlice,
+  users: usersSlice,
 })
 
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: rootReducer
 })

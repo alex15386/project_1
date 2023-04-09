@@ -14,14 +14,14 @@ const RootLayout = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={NavLink} to="counter">Counter</Nav.Link>
-            <Nav.Link as={NavLink} to="stuff">Stuff</Nav.Link>
+            <Nav.Link as={NavLink} to="posts">Posts</Nav.Link>
+            <Nav.Link as={NavLink} to="addpost">Add Post</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item as={NavLink} to="base">Movies</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
+              <NavDropdown.Item as={NavLink} to="movieslist">Movies</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="auth">
+                Auth
               </NavDropdown.Item>
-              <NavDropdown.Item as={NavLink} to="">Add Book</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="users">Users</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item as={NavLink} to="">
                 Posts
